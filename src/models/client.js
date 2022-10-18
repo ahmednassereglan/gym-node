@@ -13,21 +13,26 @@ const clientSchema = new mongoose.Schema({
 const Client = mongoose.model('Client', clientSchema);
 
 
-function validateClient(client) {
-  const schema = {
-    name: Joi.string().min(3).required()
-  };
+// function validateClient(client) {
+//   const schema = {
+//     name: Joi.string().min(3).required()
+//   };
 
-  return Joi.validate(client, schema);
-}
+// //   return Joi.validate(client, schema);
+// return Joi.validate(client, schema)
+// }
 
+
+const clientVal = Joi.object({ name: Joi.string().min(3).required() });
+    
+    // const validation = schema.validate(req.body);
 
 module.exports = {
     Client,
-    validateClient
+    clientVal
 }
 
 // exports.clientSchema = clientSchema;
 // exports.Client = Client; 
-// exports.validate = validateClient;
+// exports.validate = validateClient();
 // module.exports = mongoose.model('Product', ProductSchema)
