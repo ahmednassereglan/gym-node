@@ -16,10 +16,12 @@ exports.postclient = async(req, res) => {
 
     const { error } = clientVal.validate(req.body);
     if (error){
-        return res.status(400).json(error.details[0].message);
+        return res.status(400).json({
+            err:error.details[0].message
+        });
     } 
 
-    let client = new Client({ name: req.body.name });
+    let client = new Client(req.body);
     clients = await client.save();
     // res.send(clients);
     res.status(201).json({
