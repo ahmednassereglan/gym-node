@@ -1,12 +1,58 @@
+// Importing
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv");
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 8000;
-const routeee = require("./routes/route");
+
 // App Config
 const app = express();
-dotenv.config();
+dotenv.config({ path: 'src/config/config.env' })
 
-app.get("/", (req, res) => res.send("Hello World!"));
-app.use("/api/route", routeee);
+// DB Config
+const connectDatabase = require('./config/db')
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+// Routes
+const clientRoute = require("./routes/clientRoute");
+
+
+
+
+
+
+
+// App Use
+app.use(express.json());
+// app.use(express.urlencoded({extended:false}));
+app.use(cors());
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'SecretStringForSessions',
+  saveUninitialized: true,
+  resave: true
+}));
+app.use(cookieParser())
+
+app.use((req, res, next)=>{
+    res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-type, Authorization, X-Requested-With, Accept, Origin');
+      res.setHeader('Access-Control-Allow-Credentials', true);
+      next();
+  });
+app.options('*', cors());
+app.use(cors());  
+
+// Database Connection
+connectDatabase()
+
+
+
+// Using Routes
+app.use("/api", clientRoute);
+
+
+
+
+app.listen(port, () => console.log(`Server started on Port: ${port}! ... and Host http://localhost:${port}`));
