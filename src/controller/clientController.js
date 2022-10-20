@@ -3,9 +3,6 @@ const Joi = require('joi');
 const { Client, clientVal } = require("../models/client")
 
 
-exports.funIndexGet = async(req, res, next) => {
-    console.log('here')
-}
 
 exports.getclient = async(req, res) => {
     const clients = await Client.find().sort("name");

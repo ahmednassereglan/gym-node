@@ -3,8 +3,10 @@ const router = express.Router();
 
 const clientController = require('../controller/clientController')
 
-router.get("/client", clientController.getclient);
+const middleware = require('../config/auth');
 
-router.post("/new/client", clientController.postclient);
+router.get("/client", middleware.success ,clientController.getclient);
+
+router.post("/new/client", middleware.success , clientController.postclient);
 
 module.exports = router;

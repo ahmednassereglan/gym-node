@@ -16,7 +16,9 @@ const connectDatabase = require('./config/db')
 
 // Routes
 const clientRoute = require("./routes/clientRoute");
-
+const employeeRoute = require("./routes/employeeRoute");
+const machineRoute = require("./routes/machineRoute")
+const adminRoute = require("./routes/adminRoute")
 
 
 
@@ -52,7 +54,9 @@ connectDatabase()
 
 // Using Routes
 app.use("/api", clientRoute);
-
+app.use("/api", employeeRoute);
+app.use("/api", machineRoute)
+app.use("/api", adminRoute)
 
 
 

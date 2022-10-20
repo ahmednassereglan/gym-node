@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-const clientSchema = new mongoose.Schema({
+const employeeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -30,41 +30,39 @@ const clientSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    age: {
-        type: Number,
-        required: true
-    },
-    duration: {
-        type: String,
-        required: true,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    department : {
+    type: String,
+    required: true,
+    
+  },
+  salary :{
+    type: String,
+    required: true,
+    minlength: 3,
+  },
 
 });
 
-const Client = mongoose.model('Client', clientSchema);
+const Employee = mongoose.model('Employee', employeeSchema);
 
-const clientVal = Joi.object({
+const employeeVal = Joi.object({
     name: Joi.string().min(3).required(),
     phone: Joi.number().min(3).required(),
     address: Joi.string().min(3).required(),
     ssn: Joi.string().min(3).required(),
     gender: Joi.string().required(),
-    age: Joi.number().required(),
-    duration: Joi.string().required(),
+    department: Joi.string().required(),
+    salary: Joi.string().min(3).required()
 
 });
 
 
 module.exports = {
-    Client,
-    clientVal
+    Employee,
+    employeeVal
 }
 
-// exports.clientSchema = clientSchema;
-// exports.Client = Client; 
-// exports.validate = validateClient();
+// exports.employeeSchema = employeeSchema;
+// exports.employee = employee; 
+// exports.validate = validateemployee();
 // module.exports = mongoose.model('Product', ProductSchema)
