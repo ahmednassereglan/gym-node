@@ -8,7 +8,7 @@ const port = process.env.PORT || 8000;
 
 // App Config
 const app = express();
-dotenv.config({ path: 'src/config/config.env' })
+dotenv.config({ path: '.env' })
 
 // DB Config
 const connectDatabase = require('./config/db')
