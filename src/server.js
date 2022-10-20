@@ -44,6 +44,7 @@ app.use((req, res, next)=>{
 app.options('*', cors());
 app.use(cors());  
 
+
 // Database Connection
 connectDatabase()
 

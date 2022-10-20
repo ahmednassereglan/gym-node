@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connection_url = "mongodb://ali:12345@ac-duhubsi-shard-00-00.ol0ohiy.mongodb.net:27017,ac-duhubsi-shard-00-01.ol0ohiy.mongodb.net:27017,ac-duhubsi-shard-00-02.ol0ohiy.mongodb.net:27017/gym?ssl=true&replicaSet=atlas-p3op7d-shard-0&authSource=admin&retryWrites=true&w=majority";
+const connection_url = process.env.DBCONNECT;
 
 mongoose.Promise = global.Promise;
 
